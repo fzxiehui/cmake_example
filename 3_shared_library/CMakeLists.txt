@@ -14,6 +14,10 @@ add_library( example_shared_library SHARED
 	${SHARED_LIB_SOURCES}
 )
 
+target_compile_definitions( example_shared_library PRIVATE BUILD_DLL )
+
+target_compile_definitions( example_shared_library PRIVATE USE_DLL )
+
 target_include_directories( example_shared_library
 	PUBLIC
 		${PROJECT_SOURCE_DIR}/include
