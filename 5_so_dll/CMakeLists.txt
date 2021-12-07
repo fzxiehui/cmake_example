@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.10)
+
+project( example )
+
+# 设置动态库文件路径
+set( SHARED_LIB_SOURCES 
+	src/ExampleSharedLibrary.cpp
+)
+
+set( EXE_SOURCES
+	src/main.cpp
+)
+
+# 添加动态库
+add_library( example_shared_library SHARED
+	${SHARED_LIB_SOURCES}
+)
+
+# 添加动态库头文件目录
+target_include_directories( example_shared_library
+	PUBLIC
+		${PROJECT_SOURCE_DIR}/include
+)
+
+# 添加输出列表
+add_executable( example ${EXE_SOURCES} )
+
+# 添加主项目头文件
+target_include_directories( example 
+	PRIVATE
+		${PROJECT_SOURCE_DIR}/include
+)
+
+# 链接
+target_link_libraries(example 
+	PRIVATE
+		example_shared_library
+)
